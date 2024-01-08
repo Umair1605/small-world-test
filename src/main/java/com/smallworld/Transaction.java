@@ -1,7 +1,5 @@
 package com.smallworld;
 
-import java.util.Objects;
-
 public class Transaction {
     private int mtn;
     private double amount;
@@ -13,7 +11,7 @@ public class Transaction {
     private boolean issueSolved;
     private String issueMessage;
 
-    public Transaction() {}
+    public Transaction(){}
 
     public Transaction(
             int mtn,
@@ -69,11 +67,10 @@ public class Transaction {
         return issueId;
     }
 
-    public boolean hasIssue() {
-        return issueId != null;
+    public Boolean hasIssue() {
+        return this.getIssueId() != null;
     }
-
-    public boolean isIssueSolved() {
+    public Boolean isIssueSolved() {
         return issueSolved;
     }
 
@@ -81,13 +78,11 @@ public class Transaction {
         return issueMessage;
     }
 
-    public boolean hasClient(String clientFullName) {
-        return Objects.equals(senderFullName, clientFullName) || Objects.equals(beneficiaryFullName, clientFullName);
-    }
+
 
     @Override
     public String toString() {
         return String.format("MTN: %d%nAmount: %.2f%nSender: %s%nBeneficiary: %s%nIssue ID: %s%nIssue Solved: %b%nIssue Message: %s%n--------------------------%n",
-                mtn, amount, senderFullName, beneficiaryFullName, issueId, issueSolved, Objects.requireNonNullElse(issueMessage, "N/A"));
+                mtn, amount, senderFullName, beneficiaryFullName, issueId, issueSolved, issueMessage != null ? issueMessage : "N/A");
     }
 }

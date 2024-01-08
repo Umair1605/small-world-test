@@ -7,19 +7,20 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TransactionDataReader {
-
-    private static final Logger logger = Logger.getLogger(TransactionDataReader.class.getName());
-
+    private List<Transaction> data;
     public List<Transaction> readTransactionsFromFile(String filePath) {
+
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return List.of(objectMapper.readValue(Paths.get(filePath).toFile(), Transaction[].class));
+            if (this.data == null || this.data.isEmpty() ){
+                ObjectMapper objectMapper = new ObjectMapper();
+                return List.of(objectMapper.readValue(Paths.get(filePath).toFile(), Transaction[].class));
+            }
+            return this.data;
+
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Error reading transactions from file", e);
+            e.printStackTrace();
             return Collections.emptyList();
         }
     }

@@ -1,14 +1,13 @@
 package com.smallworld;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public class MainApplication {
 
-    public static void main(String[] args) {
-        TransactionDataReader dataReader = new TransactionDataReader();
-        List<Transaction> transactions = dataReader.readTransactionsFromFile("transactions.json");
-        TransactionDataFetcher dataFetcher = new TransactionDataFetcher(transactions);
+    public static void main(String[] args) throws IOException {
+        TransactionDataFetcher dataFetcher = new TransactionDataFetcher(new TransactionDataReader());
 
         printTotalTransactionAmount(dataFetcher);
         printTotalAmountSentBy(dataFetcher, "Aunt Polly");
